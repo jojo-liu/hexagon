@@ -1,0 +1,50 @@
+server:
+  port: 8080
+  session:
+    timeout: 1800
+  tomcat:
+    max-threads: 3000
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #TODO 更改为自己的数据库url，username，password
+    url: jdbc:mysql://localhost:3306/hexagon
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    #durid config info
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  thymeleaf:
+    cache: false
+  http:
+    multipart:
+      enabled: true
+#mybatis
+mybatis:
+  type-aliases-package: com.jojoliu.hexagon.model
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    auto-mapping-behavior: full
+    default-statement-timeout: 25000
+    map-underscore-to-camel-case: true
+#log4j2
+logging:
+  config: classpath:log4j2.xml
+#durid admin info
+druid:
+  admin:
+    username: admin
+    password: admin
