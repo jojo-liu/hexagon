@@ -16,8 +16,14 @@ public interface PostService {
 
     void updatePost(Post post);
 
+    //used by User
     Response<Page<Post>> getPostByUserid(Page<Post> page, PostQuery query);
 
+    Response<Post> get(Long postid);
+
+//    Response<Post> getPostByUseridAndPostid(PostQuery query);
+
+    //used by Consultant
     Response<Page<Post>> getPostByTagid(Page<Post> page, PostQuery query);
 
 //    boolean isExist(String url);

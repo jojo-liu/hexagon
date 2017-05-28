@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jojoliu.hexagon.mapper.PayChannelMapper">
+  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.PayChannel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="payChannel" jdbcType="VARCHAR" property="paychannel" />
+    <result column="payChannelName" jdbcType="VARCHAR" property="paychannelname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, payChannel, payChannelName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from payChannel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from payChannel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    insert into payChannel (id, payChannel, payChannelName
+      )
+    values (#{id,jdbcType=INTEGER}, #{paychannel,jdbcType=VARCHAR}, #{paychannelname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    insert into payChannel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paychannel != null">
+        payChannel,
+      </if>
+      <if test="paychannelname != null">
+        payChannelName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paychannel != null">
+        #{paychannel,jdbcType=VARCHAR},
+      </if>
+      <if test="paychannelname != null">
+        #{paychannelname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    update payChannel
+    <set>
+      <if test="paychannel != null">
+        payChannel = #{paychannel,jdbcType=VARCHAR},
+      </if>
+      <if test="paychannelname != null">
+        payChannelName = #{paychannelname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    update payChannel
+    set payChannel = #{paychannel,jdbcType=VARCHAR},
+      payChannelName = #{paychannelname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.PayChannel">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="payChannel" jdbcType="VARCHAR" property="paychannel" />
+    <result column="payChannelName" jdbcType="VARCHAR" property="paychannelname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, payChannel, payChannelName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from payChannel
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from payChannel
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    insert into payChannel (id, payChannel, payChannelName
+      )
+    values (#{id,jdbcType=CHAR}, #{paychannel,jdbcType=VARCHAR}, #{paychannelname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    insert into payChannel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paychannel != null">
+        payChannel,
+      </if>
+      <if test="paychannelname != null">
+        payChannelName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="paychannel != null">
+        #{paychannel,jdbcType=VARCHAR},
+      </if>
+      <if test="paychannelname != null">
+        #{paychannelname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    update payChannel
+    <set>
+      <if test="paychannel != null">
+        payChannel = #{paychannel,jdbcType=VARCHAR},
+      </if>
+      <if test="paychannelname != null">
+        payChannelName = #{paychannelname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.PayChannel">
+    update payChannel
+    set payChannel = #{paychannel,jdbcType=VARCHAR},
+      payChannelName = #{paychannelname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

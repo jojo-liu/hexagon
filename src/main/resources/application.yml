@@ -4,8 +4,37 @@ server:
     timeout: 1800
   tomcat:
     max-threads: 3000
-
+security:
+  basic:
+    enabled: false
 spring:
+  #redis config info
+  redis:
+    database: 0
+    host: localhost
+    password:
+    port: 6379
+    timeout: 0
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+  #spring session config info
+  session:
+      store-type: redis
+  #rabbitmq config info
+  rabbitmq:
+    addresses: 127.0.0.1:5672
+    username: guest
+    password: guest
+    publisherConfirms: true
+    queueName: testQueue
+    keys:
+      orderRouting: order
+      orderBounding: order
+    exchange: testExchange
+
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     #TODO 更改为自己的数据库url，username，password

@@ -1,6 +1,7 @@
 package com.jojoliu.hexagon.service;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -9,6 +10,8 @@ import java.util.Date;
 /**
  * Created by Jojo on 22/05/2017.
  */
+
+@Service
 public class PostQuery implements Serializable {
     private static final long serialVersionUID = -7585199598535442193L;
 

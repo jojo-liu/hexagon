@@ -5,12 +5,15 @@ import com.jojoliu.hexagon.model.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Jojo on 21/05/2017.
  */
+
+@Service
 public class TagServiceImpl implements TagService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -31,7 +34,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void createTag(Tag tag) {
+    public void createTag(Tag tag, Long parentTagid) {
+        tag.setParent(parentTagid);
         tagMapper.insert(tag);
     }
 

@@ -2,6 +2,8 @@ package com.jojoliu.hexagon.mapper;
 
 import com.jojoliu.hexagon.model.Order;
 
+import java.util.List;
+
 public interface OrderMapper {
     int deleteByPrimaryKey(Long orderid);
 
@@ -14,4 +16,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<Order> selectByConsultantid(Long consultantid);
+
+    List<Order> selectByPostid(Long postid);
 }

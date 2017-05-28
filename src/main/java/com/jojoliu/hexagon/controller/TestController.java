@@ -15,13 +15,13 @@ public class TestController {
     private TestService testService;
 
     @RequestMapping("/index")
-    public String home() {
-        return "home";
+    public String index() {
+        return "index";
     }
 
     @RequestMapping("/home")
-    public String index() {
+    public String home() {
         testService.test();
-        return "index";
+        return "home";
     }
 }

@@ -2,35 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jojoliu.hexagon.mapper.PostMapper" >
   <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.Post" >
-    <id column="postID" property="postid" jdbcType="INTEGER" />
-    <result column="userID" property="userid" jdbcType="INTEGER" />
-    <result column="tagID" property="tagid" jdbcType="INTEGER" />
+    <id column="postID" property="postid" jdbcType="Long" />
+    <result column="userID" property="userid" jdbcType="Long" />
+    <result column="tagID" property="tagid" jdbcType="Long" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="summary" property="summary" jdbcType="VARCHAR" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
-    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="Long" />
   </resultMap>
   <sql id="Base_Column_List" >
     postID, userID, tagID, title, summary, createTime, updateTime, price
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from post
-    where postID = #{postid,jdbcType=INTEGER}
+    where postID = #{postid,jdbcType=Long}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from post
-    where postID = #{postid,jdbcType=INTEGER}
+    where postID = #{postid,jdbcType=Long}
   </delete>
   <insert id="insert" parameterType="com.jojoliu.hexagon.model.Post" >
     insert into post (postID, userID, tagID, 
       title, summary, createTime, 
       updateTime, price)
-    values (#{postid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{tagid,jdbcType=INTEGER}, 
+    values (#{postid,jdbcType=Long}, #{userid,jdbcType=Long}, #{tagid,jdbcType=Long}, 
       #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{price,jdbcType=INTEGER})
+      #{updatetime,jdbcType=TIMESTAMP}, #{price,jdbcType=Long})
   </insert>
   <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Post" >
     insert into post
@@ -62,13 +62,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="postid != null" >
-        #{postid,jdbcType=INTEGER},
+        #{postid,jdbcType=Long},
       </if>
       <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+        #{userid,jdbcType=Long},
       </if>
       <if test="tagid != null" >
-        #{tagid,jdbcType=INTEGER},
+        #{tagid,jdbcType=Long},
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
@@ -83,7 +83,7 @@
         #{updatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=INTEGER},
+        #{price,jdbcType=Long},
       </if>
     </trim>
   </insert>
@@ -91,10 +91,10 @@
     update post
     <set >
       <if test="userid != null" >
-        userID = #{userid,jdbcType=INTEGER},
+        userID = #{userid,jdbcType=Long},
       </if>
       <if test="tagid != null" >
-        tagID = #{tagid,jdbcType=INTEGER},
+        tagID = #{tagid,jdbcType=Long},
       </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -109,34 +109,34 @@
         updateTime = #{updatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
+        price = #{price,jdbcType=Long},
       </if>
     </set>
-    where postID = #{postid,jdbcType=INTEGER}
+    where postID = #{postid,jdbcType=Long}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.Post" >
     update post
-    set userID = #{userid,jdbcType=INTEGER},
-      tagID = #{tagid,jdbcType=INTEGER},
+    set userID = #{userid,jdbcType=Long},
+      tagID = #{tagid,jdbcType=Long},
       title = #{title,jdbcType=VARCHAR},
       summary = #{summary,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=TIMESTAMP},
       updateTime = #{updatetime,jdbcType=TIMESTAMP},
-      price = #{price,jdbcType=INTEGER}
-    where postID = #{postid,jdbcType=INTEGER}
+      price = #{price,jdbcType=Long}
+    where postID = #{postid,jdbcType=Long}
   </update>
   <!--以上为自动生成 -->
-  <select id="selectByTagid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByTagid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from post
-    where tagID = #{tagid,jdbcType=INTEGER}
+    where tagID = #{tagid,jdbcType=Long}
   </select>
-  <select id="selectByUserid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByUserid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select
     <include refid="Base_Column_List" />
     from post
-    where userID = #{userid,jdbcType=INTEGER}
+    where userID = #{userid,jdbcType=Long}
   </select>
 </mapper>
 

@@ -60,6 +60,24 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Response<Post> get(Long postid) {
+        Response<Post> response = new Response<Post>();
+        try{
+            Post post = postMapper.selectByPrimaryKey(postid);
+            if(post != null) {
+                response.setResult(post);
+            }else{
+                throw new Exception("cannot find post");
+            }
+        }catch (Exception e) {
+            logger.error("failed to get post from postid = {}", postid, Throwables.getStackTraceAsString(e));
+            response.setError("post.page.fail");
+        }
+        return response;
+    }
+
+
+    @Override
     public Response<Page<Post>> getPostByTagid(Page<Post> page, PostQuery query) {
         Response<Page<Post>> response = new Response<Page<Post>>();
         try{

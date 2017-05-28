@@ -114,6 +114,8 @@
       updateTime = #{updatetime,jdbcType=TIMESTAMP}
     where tagID = #{tagid,jdbcType=INTEGER}
   </update>
+
+  <!--以上为自动生成-->
   <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />

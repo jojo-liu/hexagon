@@ -12,7 +12,7 @@ public interface TagService {
 
     List<Tag> listSubTags(Long tagid);
 
-    void createTag(Tag tag);
+    void createTag(Tag tag, Long parentTagid);
 
     void deleteTag(Long tagid);
 
