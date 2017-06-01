@@ -10,10 +10,6 @@ import java.util.List;
  */
 
 public interface OrderService {
-//    void confirm(CorrelationData correlationData, boolean ack, String cause);
-//    void saveOrder(String id);
-    void sendOrderMessage(String correlationId,Object order) throws Exception;
-
     List<Order> listByConsultantid(Long consultantid);
     List<Order> listByPostid(Long postid);
 

@@ -2,6 +2,8 @@ package com.jojoliu.hexagon.mapper;
 
 import com.jojoliu.hexagon.model.PayChannel;
 
+import java.util.List;
+
 public interface PayChannelMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface PayChannelMapper {
     int updateByPrimaryKeySelective(PayChannel record);
 
     int updateByPrimaryKey(PayChannel record);
+
+    List<PayChannel> selectAll();
 }

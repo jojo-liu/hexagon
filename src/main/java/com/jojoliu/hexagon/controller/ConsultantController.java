@@ -6,7 +6,6 @@ import com.jojoliu.hexagon.common.Response;
 import com.jojoliu.hexagon.model.Consultant;
 import com.jojoliu.hexagon.service.ConsultantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +24,14 @@ public class ConsultantController {
     private ConsultantService consultantService;
 
     @RequestMapping(value = "/{tagid}")
-    public String showConsultant(Model model, Page<Consultant> page, @PathVariable Long tagid, HttpSession session) {
+//    public Response showConsultant(Model model, Page<Consultant> page, @PathVariable Long tagid, HttpSession session) {
+    public Response showConsultant(Page<Consultant> page, @PathVariable Long tagid, HttpSession session) {
         Response<Page<Consultant>> response = consultantService.showConsultant(page, tagid);
         if(!response.isSuccess()){
             throw new JsonResponseException(response.getError());
         }
-        //通过model向页面传值
-        model.addAttribute("page",response.getResult());
-        return "consultant/page";
+//        //通过model向页面传值
+//        model.addAttribute("page",response.getResult());
+        return response;
     }
 }

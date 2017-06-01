@@ -23,17 +23,6 @@ spring:
   #spring session config info
   session:
       store-type: redis
-  #rabbitmq config info
-  rabbitmq:
-    addresses: 127.0.0.1:5672
-    username: guest
-    password: guest
-    publisherConfirms: true
-    queueName: testQueue
-    keys:
-      orderRouting: order
-      orderBounding: order
-    exchange: testExchange
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver

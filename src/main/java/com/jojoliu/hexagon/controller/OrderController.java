@@ -7,11 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -26,25 +23,25 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping(value = "/rest/order/{orderid}/{price}/{postid}/{consultantid}",
-            method = RequestMethod.POST,
-            produces = MediaType.TEXT_PLAIN_VALUE+";charset=UTF-8")
-    public void saveOrder(@PathVariable Long orderid,
-                          @PathVariable Long price,
-                          @PathVariable Long postid,
-                          @PathVariable Long consultantid,HttpServletRequest request,HttpServletResponse response){
-        Order order=new Order();
-        order.setOrderid(orderid);
-        order.setPrice(price);
-        order.setPostid(postid);
-        order.setConsultantid(consultantid);
-        try {
-            orderService.sendOrderMessage(Long.toString(orderid),order);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("返回错误信息到客户端");
-        }
-    }
+//    @RequestMapping(value = "/rest/order/{orderid}/{price}/{postid}/{consultantid}",
+//            method = RequestMethod.POST,
+//            produces = MediaType.TEXT_PLAIN_VALUE+";charset=UTF-8")
+//    public void saveOrder(@PathVariable Long orderid,
+//                          @PathVariable Long price,
+//                          @PathVariable Long postid,
+//                          @PathVariable Long consultantid,HttpServletRequest request,HttpServletResponse response){
+//        Order order=new Order();
+//        order.setOrderid(orderid);
+//        order.setPrice(price);
+//        order.setPostid(postid);
+//        order.setConsultantid(consultantid);
+//        try {
+//            orderService.sendOrderMessage(Long.toString(orderid),order);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("返回错误信息到客户端");
+//        }
+//    }
 
 
     @RequestMapping(value = "/order/list/{consultantid}", method = RequestMethod.GET)

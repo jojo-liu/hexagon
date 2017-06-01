@@ -5,6 +5,7 @@ import com.jojoliu.hexagon.enums.OrderStatus;
 import com.jojoliu.hexagon.model.PayInfo;
 import com.jojoliu.hexagon.util.NoUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.Random;
 /**
  * Created by Jojo on 26/05/2017.
  */
+
+@Service
 public class PayInfoServiceImpl extends AbstractBaseService<PayInfo> implements PayInfoService{
 
 //    @Autowired
