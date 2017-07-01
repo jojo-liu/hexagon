@@ -44,40 +44,40 @@ public class Response implements Serializable {
     }
 
     public static Response ok(Object content) {
-        return new OK(content);
+        return new Ok(content);
     }
 
     public static Response error(ErrorCode errorCode) {
-        return new ERROR(errorCode);
+        return new Error(errorCode);
     }
 
     public static Response error(CommonException exception) {
-        return new ERROR(exception);
+        return new Error(exception);
     }
 
     public static Response error(int code, String msg) {
-        return new ERROR(code, msg);
+        return new Error(code, msg);
     }
 
-    public static class OK extends Response {
-        public OK(Object content) {
+    public static class Ok extends Response {
+        public Ok(Object content) {
             this.setCode(ErrorCode.OK.getCode());
             this.setContent(content);
         }
     }
 
-    public static class ERROR extends Response {
-        public ERROR(ErrorCode errorCode) {
+    public static class Error extends Response {
+        public Error(ErrorCode errorCode) {
             this.setCode(errorCode.getCode());
             this.setMsg(errorCode.getMsg());
         }
 
-        public ERROR(int code, String msg) {
+        public Error(int code, String msg) {
             this.setCode(code);
             this.setMsg(msg);
         }
 
-        public ERROR(CommonException exception) {
+        public Error(CommonException exception) {
             this.setCode(exception.getCode());
             this.setMsg(exception.getMessage());
         }
