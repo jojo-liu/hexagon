@@ -3,7 +3,7 @@
     <properties>
         <!-- TODO 改为自己的日志地址-->
         <property name="PROJECT_NAME">hexagon</property>
-        <property name="LOG_PATH">/Users/liuqiangqiang/Documents/business/data/logs</property>
+        <property name="LOG_PATH">/data/logs</property>
         <property name="LOG_BACK_PATH">${LOG_PATH}/${PROJECT_NAME}/history</property>
         <property name="ERROR_FILE_NAME">error</property>
         <property name="WARN_FILE_NAME">warn</property>

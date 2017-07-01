@@ -5,6 +5,8 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jojoliu.hexagon.common.Response;
 import com.jojoliu.hexagon.model.User;
 import com.jojoliu.hexagon.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
@@ -28,6 +30,9 @@ import java.util.Map;
 
 @RestController
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+
     @Value("${server.port}")
     private String port;
 
@@ -44,74 +49,72 @@ public class UserController {
 
     @RequestMapping(value = "/user/{token}",
             method = RequestMethod.GET,
-            produces = MediaType.TEXT_PLAIN_VALUE+";charset=UTF-8")
-    public void getUser(@PathVariable final String token, HttpServletRequest request, HttpServletResponse response){
+            produces = MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+    public void getUser(@PathVariable final String token, HttpServletRequest request, HttpServletResponse response) {
         String id = redisTemplate.execute(new RedisCallback<String>() {
             public String doInRedis(RedisConnection connection) throws DataAccessException {
                 RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
-                byte[] value =  connection.get(serializer.serialize(token));
+                byte[] value = connection.get(serializer.serialize(token));
                 return serializer.deserialize(value);
             }
         });
-        writeJson(port+":"+id,response);
+        writeJson(port + ":" + id, response);
     }
 
-//    @RequestMapping(value = "/rest/user",
+    //    @RequestMapping(value = "/rest/user",
 //            method = RequestMethod.GET,
 //            produces = MediaType.TEXT_PLAIN_VALUE+";charset=UTF-8")
     @RequestMapping("/rest/user")
-    public void getUser(HttpServletRequest request,HttpServletResponse response){
+    public void getUser(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String loginname = (String) session.getAttribute("loginname");
-        writeJson(loginname + " : " + session.getId(),response);
+        writeJson(loginname + " : " + session.getId(), response);
     }
 
     @RequestMapping(value = "/login/{loginname}/{password}",
             method = RequestMethod.GET,
-            produces = MediaType.TEXT_PLAIN_VALUE+";charset=UTF-8")
-    public void getUser(@PathVariable final String loginname, @PathVariable final String password,HttpServletRequest request,HttpServletResponse response){
-        if(loginname.equals("admin") && password.equals("123456")){
+            produces = MediaType.TEXT_PLAIN_VALUE + ";charset=UTF-8")
+    public void getUser(@PathVariable final String loginname, @PathVariable final String password,
+                        HttpServletRequest request, HttpServletResponse response) {
+        if (loginname.equals("admin") && password.equals("123456")) {
             HttpSession session = request.getSession();
             session.setAttribute("loginname", loginname);
-            writeJson("登录成功!",response);
+            writeJson("登录成功!", response);
             System.out.println("用户登录成功");
-        }else{
+        }
+        else {
             System.out.println("用户信息验证失败!");
-            writeJson("无效的用户信息!",response);
+            writeJson("无效的用户信息!", response);
         }
     }
 
-    public void writeJson(Object object,HttpServletResponse response)
-    {
-        try
-        {
+    public void writeJson(Object object, HttpServletResponse response) {
+        try {
             //DisableCircularReferenceDetect避免$ref问题
             String json = JSON.toJSONStringWithDateFormat(object, "yyyy-MM-dd HH:mm:ss", SerializerFeature.DisableCircularReferenceDetect);
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write(json);
-            System.out.println("This is the server:"+port);
+            System.out.println("This is the server:" + port);
             response.getWriter().flush();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @RequestMapping("/register")
     @ResponseBody
-    public Object register(HttpSession session, User user){
+    public Object register(HttpSession session, User user) {
 //        String ip = getRemoteHost(request);
 //        user.setIp(ip);
 //        user.setLastLoginTime(new Date());
         Response<User> response = userService.register(user);
         Map<String, Object> map = new HashMap<String, Object>();
-        if(!response.isSuccess()){
+        if (!response.isSuccess()) {
             map.put("flag", false);
             map.put("errMsg", response.getError());
         }
         session.setAttribute("visitor", response.getResult());
-        map.put("flag",true);
+        map.put("flag", true);
         return map;
     }
 
@@ -133,9 +136,21 @@ public class UserController {
 
     @RequestMapping("/logout")
     @ResponseBody
-    public Object logout(HttpSession session){
+    public Object logout(HttpSession session) {
         session.invalidate();
         return true;
     }
 
+
+    @RequestMapping(value = "/api/user/signIn", method = RequestMethod.POST)
+    public Response<String> signIn(String phoneNumber, String verificationCode) {
+        logger.info("UserController#signIn,phoneNumber:{},verificationCode:{}", phoneNumber, verificationCode);
+        //核心逻辑
+        Response<String> response = new Response<>();
+        response.setResult("phoneNumber+verificationCode");
+        return response;
+    }
+
 }
+
+
