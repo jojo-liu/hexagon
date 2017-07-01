@@ -3,6 +3,8 @@ package com.jojoliu.hexagon.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jojoliu.hexagon.common.Response;
+import com.jojoliu.hexagon.exception.CommonException;
+import com.jojoliu.hexagon.exception.ErrorCode;
 import com.jojoliu.hexagon.model.User;
 import com.jojoliu.hexagon.service.UserService;
 import org.slf4j.Logger;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by Jojo on 19/05/2017.
@@ -143,14 +146,35 @@ public class UserController {
 
 
     @RequestMapping(value = "/api/user/signIn", method = RequestMethod.POST)
-    public Response<String> signIn(String phoneNumber, String verificationCode) {
+    public Response signIn(String phoneNumber, String verificationCode) {
         logger.info("UserController#signIn,phoneNumber:{},verificationCode:{}", phoneNumber, verificationCode);
         //核心逻辑
-        Response<String> response = new Response<>();
-        response.setResult("phoneNumber+verificationCode");
-        return response;
+        String result = phoneNumber + "   " + verificationCode;
+        //返回正常结果
+        return Response.ok(result);
     }
 
+
+    //异常情形处理方式
+
+    @RequestMapping(value = "/api/user/signIn", method = RequestMethod.POST)
+    public Response signInError(String phoneNumber, String verificationCode) {
+        logger.info("UserController#signIn,phoneNumber:{},verificationCode:{}", phoneNumber, verificationCode);
+        if (Objects.isNull(phoneNumber) || Objects.isNull(verificationCode)) {
+            return Response.error(ErrorCode.PARAM_ERROR);
+        }
+        //核心逻辑,调用service
+        try {
+            //xxService处理,该Service可能会抛出CommonException
+            throw new CommonException(ErrorCode.SERVER_ERROR);
+        } catch (CommonException e) {
+            logger.warn(e.getMessage(),e);
+            return Response.error(e);
+        } catch (Exception e) {
+            logger.warn(e.getMessage(),e);
+            return Response.error(ErrorCode.SERVER_ERROR);
+        }
+    }
 }
 
 
