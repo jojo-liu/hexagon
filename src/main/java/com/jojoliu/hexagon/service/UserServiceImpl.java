@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
     public int updateInfo(User user) throws Exception {
         //实现有效性校验
         User resultUser = userMapper.selectByPrimaryKey(user.getUserid());
-        if(Objects.isNull(user)) {
+        if(Objects.isNull(resultUser)) {
             throw new CommonException(ErrorCode.USERINFO_ERROR);
         }
         int result = userMapper.updateByPrimaryKey(user);

@@ -65,7 +65,7 @@ public class UserController {
 
     @RequestMapping(value = "/api/user/updateInfo", method = RequestMethod.POST)
     public Response updateInfo(User user) {
-        logger.info("UserController#updateInfo,userid:{}", user.getUserid());
+        logger.info("UserController#updateInfo,user:{}", user);
         //核心逻辑,调用service
         //实现非空性校验
         if (Objects.isNull(user) || Objects.isNull(user.getUserid())) {
