@@ -22,7 +22,7 @@ public class LogAspect {
     private static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
 
-    @Pointcut(value = "execution (* com.jojoliu.controller..*.*(..))")
+    @Pointcut(value = "execution (* com.jojoliu.hexagon.controller..*.*(..))")
     public void pointcut() {
 
     }
