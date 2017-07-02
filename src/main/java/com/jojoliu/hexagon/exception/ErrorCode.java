@@ -9,7 +9,7 @@ public enum ErrorCode {
 
     SERVER_ERROR(10000, "服务器异常"),
     PARAM_ERROR(10001, "请求参数不正确"),
-
+    USERINFO_ERROR(10002, "用户数据不存在"),
     //自己随意添加错误类型
     ;
 

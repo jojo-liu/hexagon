@@ -1,6 +1,5 @@
 package com.jojoliu.hexagon.service;
 
-import com.jojoliu.hexagon.common.Response;
 import com.jojoliu.hexagon.model.User;
 
 
@@ -9,9 +8,7 @@ import com.jojoliu.hexagon.model.User;
  */
 
 public interface UserService {
-    Response<User> login(String username, String password);
+    User signIn(String phoneNumber, String verificationCode) throws Exception;
 
-    Response<User> register(User user);
-
-    void update(User user);
+    int updateInfo(User user) throws Exception;
 }

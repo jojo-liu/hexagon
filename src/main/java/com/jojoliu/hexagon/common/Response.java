@@ -62,6 +62,7 @@ public class Response implements Serializable {
     public static class Ok extends Response {
         public Ok(Object content) {
             this.setCode(ErrorCode.OK.getCode());
+            this.setMsg(ErrorCode.OK.getMsg());
             this.setContent(content);
         }
     }

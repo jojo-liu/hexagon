@@ -8,7 +8,7 @@ security:
   basic:
     enabled: false
 spring:
-  #redis config info
+#  redis config info
   redis:
     database: 0
     host: localhost
