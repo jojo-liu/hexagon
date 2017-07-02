@@ -10,6 +10,8 @@ import com.jojoliu.hexagon.model.Post;
  */
 
 public interface PostService {
+
+    int publish(Post post) throws Exception;
     void createPost(Post post);
 
     void deletePost(Long postid);

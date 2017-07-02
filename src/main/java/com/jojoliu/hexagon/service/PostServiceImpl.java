@@ -26,10 +26,13 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostMapper postMapper;
 
-    public void createPost(Post post) {
-        postMapper.insert(post);
+    public int publish(Post post) {
+        //进行有效性校验
+
+        int result = postMapper.insert(post);
 //        BlogStatistics blogStatistics = new BlogStatistics(blog.getId());
 //        blogStatisticsMapper.insert(blogStatistics);
+        return result;
     }
 
     public void deletePost(Long postid) {
