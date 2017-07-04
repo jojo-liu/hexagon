@@ -3,44 +3,44 @@ package com.jojoliu.hexagon.model;
 import java.util.Date;
 
 public class Post {
-    private Long postid;
+    private String postId;
 
-    private Long userid;
+    private String userId;
 
-    private Long tagid;
+    private String tagId;
 
     private String title;
 
     private String summary;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date updatetime;
+    private Date updateTime;
 
-    private Long price;
+    private Integer price;
 
-    public Long getPostid() {
-        return postid;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setPostid(Long postid) {
-        this.postid = postid;
+    public void setPostId(String postId) {
+        this.postId = postId == null ? null : postId.trim();
     }
 
-    public Long getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public Long getTagid() {
-        return tagid;
+    public String getTagId() {
+        return tagId;
     }
 
-    public void setTagid(Long tagid) {
-        this.tagid = tagid;
+    public void setTagId(String tagId) {
+        this.tagId = tagId == null ? null : tagId.trim();
     }
 
     public String getTitle() {
@@ -59,27 +59,27 @@ public class Post {
         this.summary = summary == null ? null : summary.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdatetime() {
-        return updatetime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }

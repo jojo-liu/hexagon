@@ -3,13 +3,13 @@ package com.jojoliu.hexagon.mapper;
 import com.jojoliu.hexagon.model.Session;
 
 public interface SessionMapper {
-    int deleteByPrimaryKey(Long sessionid);
+    int deleteByPrimaryKey(String sessionId);
 
     int insert(Session record);
 
     int insertSelective(Session record);
 
-    Session selectByPrimaryKey(Long sessionid);
+    Session selectByPrimaryKey(String sessionId);
 
     int updateByPrimaryKeySelective(Session record);
 

@@ -3,68 +3,68 @@ package com.jojoliu.hexagon.model;
 import java.util.Date;
 
 public class Order {
-    private Long orderid;
+    private String orderId;
 
-    private String orderno;
+    private String orderNo;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Long price;
+    private Integer price;
 
-    private Long postid;
+    private String postId;
 
-    private Long consultantid;
+    private String consultantId;
 
     private String status;
 
-    private String paychannel;
+    private String payChannel;
 
-    public Long getOrderid() {
-        return orderid;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderid(Long orderid) {
-        this.orderid = orderid;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId == null ? null : orderId.trim();
     }
 
-    public String getOrderno() {
-        return orderno;
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderno(String orderno) {
-        this.orderno = orderno == null ? null : orderno.trim();
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public Long getPostid() {
-        return postid;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setPostid(Long postid) {
-        this.postid = postid;
+    public void setPostId(String postId) {
+        this.postId = postId == null ? null : postId.trim();
     }
 
-    public Long getConsultantid() {
-        return consultantid;
+    public String getConsultantId() {
+        return consultantId;
     }
 
-    public void setConsultantid(Long consultantid) {
-        this.consultantid = consultantid;
+    public void setConsultantId(String consultantId) {
+        this.consultantId = consultantId == null ? null : consultantId.trim();
     }
 
     public String getStatus() {
@@ -75,11 +75,11 @@ public class Order {
         this.status = status == null ? null : status.trim();
     }
 
-    public String getPaychannel() {
-        return paychannel;
+    public String getPayChannel() {
+        return payChannel;
     }
 
-    public void setPaychannel(String paychannel) {
-        this.paychannel = paychannel == null ? null : paychannel.trim();
+    public void setPayChannel(String payChannel) {
+        this.payChannel = payChannel == null ? null : payChannel.trim();
     }
 }

@@ -3,44 +3,44 @@ package com.jojoliu.hexagon.model;
 import java.util.Date;
 
 public class Consultant {
-    private Long consultantid;
+    private String consultantId;
 
-    private Long tagid;
+    private String tagId;
 
-    private String username;
+    private String userName;
 
     private String password;
 
-    private String realname;
+    private String realName;
 
     private String email;
 
-    private Date createtime;
+    private Date createTime;
 
     private String avatar;
 
-    public Long getConsultantid() {
-        return consultantid;
+    public String getConsultantId() {
+        return consultantId;
     }
 
-    public void setConsultantid(Long consultantid) {
-        this.consultantid = consultantid;
+    public void setConsultantId(String consultantId) {
+        this.consultantId = consultantId == null ? null : consultantId.trim();
     }
 
-    public Long getTagid() {
-        return tagid;
+    public String getTagId() {
+        return tagId;
     }
 
-    public void setTagid(Long tagid) {
-        this.tagid = tagid;
+    public void setTagId(String tagId) {
+        this.tagId = tagId == null ? null : tagId.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -51,12 +51,12 @@ public class Consultant {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname == null ? null : realname.trim();
+    public void setRealName(String realName) {
+        this.realName = realName == null ? null : realName.trim();
     }
 
     public String getEmail() {
@@ -67,12 +67,12 @@ public class Consultant {
         this.email = email == null ? null : email.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getAvatar() {

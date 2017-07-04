@@ -1,8 +1,8 @@
 package com.jojoliu.hexagon.service;
 
-import com.jojoliu.hexagon.common.Page;
-import com.jojoliu.hexagon.common.Response;
 import com.jojoliu.hexagon.model.Post;
+
+import java.util.List;
 
 
 /**
@@ -11,24 +11,13 @@ import com.jojoliu.hexagon.model.Post;
 
 public interface PostService {
 
-    int publish(Post post) throws Exception;
-    void createPost(Post post);
+    boolean publish(Post post) throws Exception;
 
-    void deletePost(Long postid);
+    boolean modify(Post post) throws Exception;
 
-    void updatePost(Post post);
+    boolean delete(Post post) throws Exception;
 
-    //used by User
-    Response<Page<Post>> getPostByUserid(Page<Post> page, PostQuery query);
+    List<Post> getByUser(String userId) throws Exception;
 
-    Response<Post> get(Long postid);
-
-//    Response<Post> getPostByUseridAndPostid(PostQuery query);
-
-    //used by Consultant
-    Response<Page<Post>> getPostByTagid(Page<Post> page, PostQuery query);
-
-//    boolean isExist(String url);
-
-//    Response<Map<String, Post>> getPrevAndNextBlog(Long postid);
+    List<Post> getByConsultant(String tagId, String consultantId) throws Exception;
 }

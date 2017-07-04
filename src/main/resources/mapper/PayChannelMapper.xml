@@ -10,7 +10,7 @@
     id, payChannel, payChannelName
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from payChannel
     where id = #{id,jdbcType=CHAR}

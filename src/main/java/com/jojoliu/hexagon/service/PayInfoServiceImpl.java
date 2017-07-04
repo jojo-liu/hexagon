@@ -1,6 +1,5 @@
 package com.jojoliu.hexagon.service;
 
-import com.jojoliu.hexagon.common.Response;
 import com.jojoliu.hexagon.enums.OrderStatus;
 import com.jojoliu.hexagon.model.PayInfo;
 import com.jojoliu.hexagon.util.NoUtil;
@@ -46,25 +45,25 @@ public class PayInfoServiceImpl extends AbstractBaseService<PayInfo> implements 
         return payInfo;
     }
 
-    @Override
-    public Response pay(PayInfo payInfo) {
-        payInfo = this.add(payInfo);
-        Response response = new Response();
-        try {
-            if (payMock()) {
-                payInfo.setStatus(OrderStatus.S.name());
-                response.setResult(payInfo);
-            } else {
-                payInfo.setStatus(OrderStatus.F.name());
-                response.setError("支付失败");
-            }
-        } catch (Exception e) {
-            payInfo.setStatus(OrderStatus.P.name());
-            response.setError("支付发生异常");
-        }
-        mapper.updateByPrimaryKey(payInfo);
-        return response;
-    }
+//    @Override
+//    public Response pay(PayInfo payInfo) {
+//        payInfo = this.add(payInfo);
+//        Response response = new Response();
+//        try {
+//            if (payMock()) {
+//                payInfo.setStatus(OrderStatus.S.name());
+//                response.setResult(payInfo);
+//            } else {
+//                payInfo.setStatus(OrderStatus.F.name());
+//                response.setError("支付失败");
+//            }
+//        } catch (Exception e) {
+//            payInfo.setStatus(OrderStatus.P.name());
+//            response.setError("支付发生异常");
+//        }
+//        mapper.updateByPrimaryKey(payInfo);
+//        return response;
+//    }
 
     @Override
     public boolean payMock() {

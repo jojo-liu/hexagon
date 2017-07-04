@@ -16,7 +16,7 @@ public class TestService {
     private TestMapper testMapper;
 
     public void test() {
-        Test test = testMapper.selectByPrimaryKey((long) 1);
+        Test test = testMapper.selectByPrimaryKey(1);
         LogUtil.logInfo("test name is " + test.getName());
     }
 }

@@ -5,17 +5,17 @@ import com.jojoliu.hexagon.model.Consultant;
 import java.util.List;
 
 public interface ConsultantMapper {
-    int deleteByPrimaryKey(Long consultantid);
+    int deleteByPrimaryKey(String consultantId);
 
     int insert(Consultant record);
 
     int insertSelective(Consultant record);
 
-    Consultant selectByPrimaryKey(Long consultantid);
+    Consultant selectByPrimaryKey(String consultantId);
 
     int updateByPrimaryKeySelective(Consultant record);
 
     int updateByPrimaryKey(Consultant record);
 
-    List<Consultant> selectByTagid(Long tagid);
+    List<Consultant> selectByTagId(String tagId);
 }

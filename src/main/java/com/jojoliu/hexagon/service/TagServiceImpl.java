@@ -1,5 +1,6 @@
 package com.jojoliu.hexagon.service;
 
+import com.jojoliu.hexagon.controller.UserController;
 import com.jojoliu.hexagon.mapper.TagMapper;
 import com.jojoliu.hexagon.model.Tag;
 import org.slf4j.Logger;
@@ -16,36 +17,20 @@ import java.util.List;
 @Service
 public class TagServiceImpl implements TagService {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private TagMapper tagMapper;
 
     @Override
-    public List<Tag> list() {
+    public List<Tag> showAll() throws Exception {
         List<Tag> tags = tagMapper.selectAll();
         return tags;
     }
 
     @Override
-    public List<Tag> listSubTags(Long tagid) {
-        List<Tag> tags = tagMapper.selectByParent(tagid);
+    public List<Tag> showSubTag(String tagId) throws Exception{
+        List<Tag> tags = tagMapper.selectByParent(tagId);
         return tags;
-    }
-
-    @Override
-    public void createTag(Tag tag, Long parentTagid) {
-        tag.setParent(parentTagid);
-        tagMapper.insert(tag);
-    }
-
-    @Override
-    public void deleteTag(Long tagid) {
-        tagMapper.deleteByPrimaryKey(tagid);
-    }
-
-    @Override
-    public void updateTag(Tag tag) {
-        tagMapper.updateByPrimaryKeySelective(tag);
     }
 }

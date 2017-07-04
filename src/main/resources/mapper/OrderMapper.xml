@@ -2,105 +2,127 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jojoliu.hexagon.mapper.OrderMapper">
   <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.Order">
-    <id column="orderID" jdbcType="INTEGER" property="orderid" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="price" jdbcType="INTEGER" property="price" />
-    <result column="postID" jdbcType="INTEGER" property="postid" />
-    <result column="consultantID" jdbcType="INTEGER" property="consultantid" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="consultant_id" jdbcType="VARCHAR" property="consultantId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="pay_channel" jdbcType="VARCHAR" property="payChannel" />
   </resultMap>
   <sql id="Base_Column_List">
-    orderID, createTime, price, postID, consultantID
+    order_id, order_no, create_time, price, post_id, consultant_id, status, pay_channel
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
     <include refid="Base_Column_List" />
     from order
-    where orderID = #{orderid,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from order
-    where orderID = #{orderid,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.jojoliu.hexagon.model.Order">
-    insert into order (orderID, createTime, price,
-      postID, consultantID)
-    values (#{orderid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{price,jdbcType=INTEGER},
-      #{postid,jdbcType=INTEGER}, #{consultantid,jdbcType=INTEGER})
+    insert into order (order_id, order_no, create_time, 
+      price, post_id, consultant_id, 
+      status, pay_channel)
+    values (#{orderId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{price,jdbcType=INTEGER}, #{postId,jdbcType=VARCHAR}, #{consultantId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{payChannel,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Order">
     insert into order
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderid != null">
-        orderID,
+      <if test="orderId != null">
+        order_id,
       </if>
-      <if test="createtime != null">
-        createTime,
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="price != null">
         price,
       </if>
-      <if test="postid != null">
-        postID,
+      <if test="postId != null">
+        post_id,
       </if>
-      <if test="consultantid != null">
-        consultantID,
+      <if test="consultantId != null">
+        consultant_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="payChannel != null">
+        pay_channel,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderid != null">
-        #{orderid,jdbcType=INTEGER},
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="price != null">
         #{price,jdbcType=INTEGER},
       </if>
-      <if test="postid != null">
-        #{postid,jdbcType=INTEGER},
+      <if test="postId != null">
+        #{postId,jdbcType=VARCHAR},
       </if>
-      <if test="consultantid != null">
-        #{consultantid,jdbcType=INTEGER},
+      <if test="consultantId != null">
+        #{consultantId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="payChannel != null">
+        #{payChannel,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.Order">
     update order
     <set>
-      <if test="createtime != null">
-        createTime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=INTEGER},
       </if>
-      <if test="postid != null">
-        postID = #{postid,jdbcType=INTEGER},
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=VARCHAR},
       </if>
-      <if test="consultantid != null">
-        consultantID = #{consultantid,jdbcType=INTEGER},
+      <if test="consultantId != null">
+        consultant_id = #{consultantId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="payChannel != null">
+        pay_channel = #{payChannel,jdbcType=VARCHAR},
       </if>
     </set>
-    where orderID = #{orderid,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.Order">
     update order
-    set createTime = #{createtime,jdbcType=TIMESTAMP},
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       price = #{price,jdbcType=INTEGER},
-      postID = #{postid,jdbcType=INTEGER},
-      consultantID = #{consultantid,jdbcType=INTEGER}
-    where orderID = #{orderid,jdbcType=INTEGER}
+      post_id = #{postId,jdbcType=VARCHAR},
+      consultant_id = #{consultantId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      pay_channel = #{payChannel,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
-  <!--以上为自动生成-->
-  <select id="selectByConsultantid" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from order
-    where consultantID = #{consultantid,jdbcType=INTEGER}
-  </select>
-  <select id="selectBypostid" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from order
-    where postID = #{postid,jdbcType=INTEGER}
-  </select>
 </mapper>

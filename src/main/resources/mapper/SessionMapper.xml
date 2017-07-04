@@ -1,131 +1,131 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jojoliu.hexagon.mapper.SessionMapper" >
-  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.Session" >
-    <id column="sessionID" property="sessionid" jdbcType="INTEGER" />
-    <result column="accessToken" property="accesstoken" jdbcType="VARCHAR" />
-    <result column="refreshToken" property="refreshtoken" jdbcType="VARCHAR" />
-    <result column="accessTokenValidTime" property="accesstokenvalidtime" jdbcType="VARCHAR" />
-    <result column="refreshTokenTime" property="refreshtokentime" jdbcType="VARCHAR" />
-    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
-    <result column="userID" property="userid" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jojoliu.hexagon.mapper.SessionMapper">
+  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.Session">
+    <id column="session_id" jdbcType="VARCHAR" property="sessionId" />
+    <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
+    <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken" />
+    <result column="access_token_validTime" jdbcType="VARCHAR" property="accessTokenValidtime" />
+    <result column="refresh_token_time" jdbcType="VARCHAR" property="refreshTokenTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    sessionID, accessToken, refreshToken, accessTokenValidTime, refreshTokenTime, createTime, 
-    updateTime, userID
+  <sql id="Base_Column_List">
+    session_id, access_token, refresh_token, access_token_validTime, refresh_token_time, 
+    create_time, update_time, user_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from session
-    where sessionID = #{sessionid,jdbcType=INTEGER}
+    where session_id = #{sessionId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from session
-    where sessionID = #{sessionid,jdbcType=INTEGER}
+    where session_id = #{sessionId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jojoliu.hexagon.model.Session" >
-    insert into session (sessionID, accessToken, refreshToken, 
-      accessTokenValidTime, refreshTokenTime, 
-      createTime, updateTime, userID
+  <insert id="insert" parameterType="com.jojoliu.hexagon.model.Session">
+    insert into session (session_id, access_token, refresh_token, 
+      access_token_validTime, refresh_token_time, 
+      create_time, update_time, user_id
       )
-    values (#{sessionid,jdbcType=INTEGER}, #{accesstoken,jdbcType=VARCHAR}, #{refreshtoken,jdbcType=VARCHAR}, 
-      #{accesstokenvalidtime,jdbcType=VARCHAR}, #{refreshtokentime,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER}
+    values (#{sessionId,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, 
+      #{accessTokenValidtime,jdbcType=VARCHAR}, #{refreshTokenTime,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Session" >
+  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Session">
     insert into session
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sessionid != null" >
-        sessionID,
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sessionId != null">
+        session_id,
       </if>
-      <if test="accesstoken != null" >
-        accessToken,
+      <if test="accessToken != null">
+        access_token,
       </if>
-      <if test="refreshtoken != null" >
-        refreshToken,
+      <if test="refreshToken != null">
+        refresh_token,
       </if>
-      <if test="accesstokenvalidtime != null" >
-        accessTokenValidTime,
+      <if test="accessTokenValidtime != null">
+        access_token_validTime,
       </if>
-      <if test="refreshtokentime != null" >
-        refreshTokenTime,
+      <if test="refreshTokenTime != null">
+        refresh_token_time,
       </if>
-      <if test="createtime != null" >
-        createTime,
+      <if test="createTime != null">
+        create_time,
       </if>
-      <if test="updatetime != null" >
-        updateTime,
+      <if test="updateTime != null">
+        update_time,
       </if>
-      <if test="userid != null" >
-        userID,
+      <if test="userId != null">
+        user_id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sessionid != null" >
-        #{sessionid,jdbcType=INTEGER},
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=VARCHAR},
       </if>
-      <if test="accesstoken != null" >
-        #{accesstoken,jdbcType=VARCHAR},
+      <if test="accessToken != null">
+        #{accessToken,jdbcType=VARCHAR},
       </if>
-      <if test="refreshtoken != null" >
-        #{refreshtoken,jdbcType=VARCHAR},
+      <if test="refreshToken != null">
+        #{refreshToken,jdbcType=VARCHAR},
       </if>
-      <if test="accesstokenvalidtime != null" >
-        #{accesstokenvalidtime,jdbcType=VARCHAR},
+      <if test="accessTokenValidtime != null">
+        #{accessTokenValidtime,jdbcType=VARCHAR},
       </if>
-      <if test="refreshtokentime != null" >
-        #{refreshtokentime,jdbcType=VARCHAR},
+      <if test="refreshTokenTime != null">
+        #{refreshTokenTime,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatetime != null" >
-        #{updatetime,jdbcType=TIMESTAMP},
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.Session" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.Session">
     update session
-    <set >
-      <if test="accesstoken != null" >
-        accessToken = #{accesstoken,jdbcType=VARCHAR},
+    <set>
+      <if test="accessToken != null">
+        access_token = #{accessToken,jdbcType=VARCHAR},
       </if>
-      <if test="refreshtoken != null" >
-        refreshToken = #{refreshtoken,jdbcType=VARCHAR},
+      <if test="refreshToken != null">
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
       </if>
-      <if test="accesstokenvalidtime != null" >
-        accessTokenValidTime = #{accesstokenvalidtime,jdbcType=VARCHAR},
+      <if test="accessTokenValidtime != null">
+        access_token_validTime = #{accessTokenValidtime,jdbcType=VARCHAR},
       </if>
-      <if test="refreshtokentime != null" >
-        refreshTokenTime = #{refreshtokentime,jdbcType=VARCHAR},
+      <if test="refreshTokenTime != null">
+        refresh_token_time = #{refreshTokenTime,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatetime != null" >
-        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="userid != null" >
-        userID = #{userid,jdbcType=INTEGER},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
       </if>
     </set>
-    where sessionID = #{sessionid,jdbcType=INTEGER}
+    where session_id = #{sessionId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.Session" >
+  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.Session">
     update session
-    set accessToken = #{accesstoken,jdbcType=VARCHAR},
-      refreshToken = #{refreshtoken,jdbcType=VARCHAR},
-      accessTokenValidTime = #{accesstokenvalidtime,jdbcType=VARCHAR},
-      refreshTokenTime = #{refreshtokentime,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      updateTime = #{updatetime,jdbcType=TIMESTAMP},
-      userID = #{userid,jdbcType=INTEGER}
-    where sessionID = #{sessionid,jdbcType=INTEGER}
+    set access_token = #{accessToken,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      access_token_validTime = #{accessTokenValidtime,jdbcType=VARCHAR},
+      refresh_token_time = #{refreshTokenTime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where session_id = #{sessionId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -26,18 +26,18 @@ public class PayInfoController {
         logger.info("支付订单列表查询开始：");
         Response response = new Response();
         List<PayInfo> payInfoList = payInfoService.list();
-        response.setResult(payInfoList);
+//        response.setResult(payInfoList);
         logger.info("支付订单列表查询结束：{}", response);
         return response;
     }
 
-    @RequestMapping(value = "/pay", method = RequestMethod.POST)
-    private Response pay(@RequestBody PayInfo payInfo) {
-        logger.info("支付开始：{}", payInfo);
-        Response response = payInfoService.pay(payInfo);
-        logger.info("支付结束：{}", response);
-        return response;
-    }
+//    @RequestMapping(value = "/pay", method = RequestMethod.POST)
+//    private Response pay(@RequestBody PayInfo payInfo) {
+//        logger.info("支付开始：{}", payInfo);
+////        Response response = payInfoService.pay(payInfo);
+//        logger.info("支付结束：{}", response);
+//        return response;
+//    }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     private Response delete(@PathVariable Long id) {
@@ -48,13 +48,13 @@ public class PayInfoController {
         return response;
     }
 
-    @RequestMapping("/find")
-    public Response find(@RequestBody PayInfo payInfo) {
-        logger.info("查询订单开始:{}", payInfo);
-        List<PayInfo> payInfoList = payInfoService.find(payInfo);
-        Response response = new Response();
-        response.setResult(payInfoList);
-        logger.info("查询订单结束:" + response);
-        return response;
-    }
+//    @RequestMapping("/find")
+//    public Response find(@RequestBody PayInfo payInfo) {
+//        logger.info("查询订单开始:{}", payInfo);
+//        List<PayInfo> payInfoList = payInfoService.find(payInfo);
+//        Response response = new Response();
+//        response.setResult(payInfoList);
+//        logger.info("查询订单结束:" + response);
+//        return response;
+//    }
 }

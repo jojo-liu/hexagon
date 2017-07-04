@@ -3,83 +3,83 @@ package com.jojoliu.hexagon.model;
 import java.util.Date;
 
 public class Session {
-    private Long sessionid;
+    private String sessionId;
 
-    private String accesstoken;
+    private String accessToken;
 
-    private String refreshtoken;
+    private String refreshToken;
 
-    private String accesstokenvalidtime;
+    private String accessTokenValidtime;
 
-    private String refreshtokentime;
+    private String refreshTokenTime;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date updatetime;
+    private Date updateTime;
 
-    private Long userid;
+    private String userId;
 
-    public Long getSessionid() {
-        return sessionid;
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setSessionid(Long sessionid) {
-        this.sessionid = sessionid;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId == null ? null : sessionId.trim();
     }
 
-    public String getAccesstoken() {
-        return accesstoken;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setAccesstoken(String accesstoken) {
-        this.accesstoken = accesstoken == null ? null : accesstoken.trim();
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken == null ? null : accessToken.trim();
     }
 
-    public String getRefreshtoken() {
-        return refreshtoken;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public void setRefreshtoken(String refreshtoken) {
-        this.refreshtoken = refreshtoken == null ? null : refreshtoken.trim();
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken == null ? null : refreshToken.trim();
     }
 
-    public String getAccesstokenvalidtime() {
-        return accesstokenvalidtime;
+    public String getAccessTokenValidtime() {
+        return accessTokenValidtime;
     }
 
-    public void setAccesstokenvalidtime(String accesstokenvalidtime) {
-        this.accesstokenvalidtime = accesstokenvalidtime == null ? null : accesstokenvalidtime.trim();
+    public void setAccessTokenValidtime(String accessTokenValidtime) {
+        this.accessTokenValidtime = accessTokenValidtime == null ? null : accessTokenValidtime.trim();
     }
 
-    public String getRefreshtokentime() {
-        return refreshtokentime;
+    public String getRefreshTokenTime() {
+        return refreshTokenTime;
     }
 
-    public void setRefreshtokentime(String refreshtokentime) {
-        this.refreshtokentime = refreshtokentime == null ? null : refreshtokentime.trim();
+    public void setRefreshTokenTime(String refreshTokenTime) {
+        this.refreshTokenTime = refreshTokenTime == null ? null : refreshTokenTime.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdatetime() {
-        return updatetime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public Long getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 }

@@ -3,34 +3,36 @@ package com.jojoliu.hexagon.model;
 import java.util.Date;
 
 public class User {
-    private Long userid;
+    private String userId;
 
-    private String username;
+    private String userName;
 
     private String password;
 
-    private String realname;
+    private String realName;
 
     private String email;
 
-    private Date createtime;
+    private Date createTime;
 
     private String avatar;
 
-    public Long getUserid() {
-        return userid;
+    private String phoneNumber;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -41,12 +43,12 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname == null ? null : realname.trim();
+    public void setRealName(String realName) {
+        this.realName = realName == null ? null : realName.trim();
     }
 
     public String getEmail() {
@@ -57,12 +59,12 @@ public class User {
         this.email = email == null ? null : email.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getAvatar() {
@@ -71,5 +73,13 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 }

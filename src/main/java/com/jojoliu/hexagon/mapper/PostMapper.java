@@ -5,19 +5,19 @@ import com.jojoliu.hexagon.model.Post;
 import java.util.List;
 
 public interface PostMapper {
-    int deleteByPrimaryKey(Long postid);
+    int deleteByPrimaryKey(String postId);
 
     int insert(Post record);
 
     int insertSelective(Post record);
 
-    Post selectByPrimaryKey(Long postid);
+    Post selectByPrimaryKey(String postId);
 
     int updateByPrimaryKeySelective(Post record);
 
     int updateByPrimaryKey(Post record);
 
-    List<Post> selectByTagid(Long tagid);
+    List<Post> selectByUserId(String userId);
 
-    List<Post> selectByUserid(Long userid);
+    List<Post> selectByConsultant(String tagId);
 }

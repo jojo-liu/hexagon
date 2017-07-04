@@ -1,6 +1,5 @@
 package com.jojoliu.hexagon.service;
 
-import com.jojoliu.hexagon.common.Response;
 import com.jojoliu.hexagon.model.PayInfo;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface PayInfoService {
     List<PayInfo> find(PayInfo payInfo);
     PayInfo add(PayInfo payInfo);
 
-    Response pay(PayInfo payInfo);
+//    Response pay(PayInfo payInfo);
     boolean payMock();
     int delete(Long id);
 }

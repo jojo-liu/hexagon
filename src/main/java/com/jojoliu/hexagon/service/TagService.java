@@ -8,13 +8,7 @@ import java.util.List;
  * Created by Jojo on 21/05/2017.
  */
 public interface TagService {
-    List<Tag> list();
+    List<Tag> showAll() throws Exception;
 
-    List<Tag> listSubTags(Long tagid);
-
-    void createTag(Tag tag, Long parentTagid);
-
-    void deleteTag(Long tagid);
-
-    void updateTag(Tag tag);
+    List<Tag> showSubTag(String tagId) throws Exception;
 }

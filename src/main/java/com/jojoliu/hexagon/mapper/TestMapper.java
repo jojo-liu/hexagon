@@ -3,13 +3,13 @@ package com.jojoliu.hexagon.mapper;
 import com.jojoliu.hexagon.model.Test;
 
 public interface TestMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Test record);
 
     int insertSelective(Test record);
 
-    Test selectByPrimaryKey(Long id);
+    Test selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Test record);
 

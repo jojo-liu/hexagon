@@ -1,18 +1,19 @@
 package com.jojoliu.hexagon.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.google.common.base.Throwables;
-import com.jojoliu.hexagon.common.Page;
-import com.jojoliu.hexagon.common.Response;
+import com.jojoliu.hexagon.exception.CommonException;
+import com.jojoliu.hexagon.exception.ErrorCode;
+import com.jojoliu.hexagon.mapper.ConsultantMapper;
 import com.jojoliu.hexagon.mapper.PostMapper;
+import com.jojoliu.hexagon.mapper.TagMapper;
+import com.jojoliu.hexagon.mapper.UserMapper;
 import com.jojoliu.hexagon.model.Post;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.jojoliu.hexagon.util.UUidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Jojo on 21/05/2017.
@@ -21,119 +22,116 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     private PostMapper postMapper;
 
-    public int publish(Post post) {
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private ConsultantMapper consultantMapper;
+
+    @Autowired
+    private TagMapper tagMapper;
+
+    public boolean publish(Post post) throws Exception{
         //进行有效性校验
+        //检查userId, tagId
+        if(Objects.isNull(userMapper.selectByPrimaryKey(post.getUserId()))) {
+            throw new CommonException(ErrorCode.USER_INFO_ERROR);
+        }
+        if(Objects.isNull((tagMapper.selectByPrimaryKey(post.getTagId())))) {
+            throw new CommonException(ErrorCode.TAG_ERROR);
+        }
+        if(!Objects.isNull(post.getCreateTime())) {
+            post.setCreateTime(new Date());//设置创建时间
+            post.setUpdateTime(new Date());
+        }
+        post.setPostId(UUidUtil.generate());//设置postId
 
         int result = postMapper.insert(post);
-//        BlogStatistics blogStatistics = new BlogStatistics(blog.getId());
-//        blogStatisticsMapper.insert(blogStatistics);
+        if(result == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean modify(Post post) throws Exception{
+        //进行有效性校验
+        //检查userId, tagId
+        if(Objects.isNull(userMapper.selectByPrimaryKey(post.getUserId()))) {
+            throw new CommonException(ErrorCode.USER_INFO_ERROR);
+        }
+        Post postInDatabase = postMapper.selectByPrimaryKey(post.getPostId());
+        if(Objects.isNull(postInDatabase)) {
+            throw new CommonException((ErrorCode.POST_ERROR));
+        }
+        if(postInDatabase.getUserId() != post.getUserId()) {
+            throw new CommonException(ErrorCode.ILLEGAL_ERROR);//当前用户不拥有此条需求记录，非法修改
+        }
+        if(Objects.isNull((tagMapper.selectByPrimaryKey(post.getTagId())))) {
+            throw new CommonException(ErrorCode.TAG_ERROR);
+        }
+
+        int result = postMapper.updateByPrimaryKey(post);
+        if(result == 1) {//因为之前判断过post的id是有效的，这里如果返回0就表示没有修改
+            return true;
+        }
+        else {
+            return false;//新的需求和原需求记录相同，没有修改
+        }
+    }
+
+    @Override
+    public boolean delete(Post post) throws Exception{
+        //进行有效性校验
+        //检查userId, tagId是否为空，并且判断当前post为当前用户所拥有
+        if(Objects.isNull(userMapper.selectByPrimaryKey(post.getUserId()))) {
+            throw new CommonException(ErrorCode.USER_INFO_ERROR);
+        }
+        Post postInDatabase = postMapper.selectByPrimaryKey(post.getPostId());
+        if(Objects.isNull(postInDatabase)) {
+            throw new CommonException((ErrorCode.POST_ERROR));
+        }
+        if(postInDatabase.getUserId() != post.getUserId()) {
+            throw new CommonException(ErrorCode.ILLEGAL_ERROR);//当前用户不拥有此条需求记录，非法修改
+        }
+        if(Objects.isNull((tagMapper.selectByPrimaryKey(post.getTagId())))) {
+            throw new CommonException(ErrorCode.TAG_ERROR);
+        }
+
+        int result = postMapper.deleteByPrimaryKey(post.getPostId());
+        if(result == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Post> getByUser(String userId) throws Exception {
+        //进行有效性校验
+        if(Objects.isNull(userMapper.selectByPrimaryKey(userId))) {
+            throw new CommonException(ErrorCode.USER_INFO_ERROR);
+        }
+        List<Post> result = postMapper.selectByUserId(userId);
         return result;
     }
 
-    public void deletePost(Long postid) {
-        postMapper.deleteByPrimaryKey(postid);
-    }
-
     @Override
-    public void updatePost(Post post) {
-        postMapper.updateByPrimaryKeySelective(post);
-    }
-
-    @Override
-    public Response<Page<Post>> getPostByUserid(Page<Post> page, PostQuery query) {
-        Response<Page<Post>> response = new Response<Page<Post>>();
-        try{
-            PageHelper.startPage(page.getPageNo(), page.getPageSize());
-            List<Post> posts = postMapper.selectByUserid(query.getUserid());
-            PageInfo<Post> temp = new PageInfo<Post>(posts);
-            page.setData(temp.getList());
-            page.setTotal(temp.getTotal());
-            page.setPageMax(temp.getLastPage());
-            response.setResult(page);
-        }catch (Exception e){
-            logger.error("post page fail, params = {}, query = {}", query, Throwables.getStackTraceAsString(e));
-            response.setError("post.page.fail");
+    public List<Post> getByConsultant(String tagId, String consultantId) throws Exception {
+        //进行有效性校验
+        if(Objects.isNull(consultantMapper.selectByPrimaryKey(consultantId))) {
+            throw new CommonException(ErrorCode.CONSULTANT_INFO_ERROR);
         }
-        return response;
-    }
-
-    @Override
-    public Response<Post> get(Long postid) {
-        Response<Post> response = new Response<Post>();
-        try{
-            Post post = postMapper.selectByPrimaryKey(postid);
-            if(post != null) {
-                response.setResult(post);
-            }else{
-                throw new Exception("cannot find post");
-            }
-        }catch (Exception e) {
-            logger.error("failed to get post from postid = {}", postid, Throwables.getStackTraceAsString(e));
-            response.setError("post.page.fail");
+        if(Objects.isNull(tagMapper.selectByPrimaryKey(tagId))) {
+            throw new CommonException(ErrorCode.TAG_ERROR);
         }
-        return response;
+        List<Post> result = postMapper.selectByConsultant(tagId);
+        return result;
     }
-
-
-    @Override
-    public Response<Page<Post>> getPostByTagid(Page<Post> page, PostQuery query) {
-        Response<Page<Post>> response = new Response<Page<Post>>();
-        try{
-            PageHelper.startPage(page.getPageNo(), page.getPageSize());
-            List<Post> posts = postMapper.selectByTagid(query.getTagid());
-            PageInfo<Post> temp = new PageInfo<Post>(posts);
-            page.setData(temp.getList());
-            page.setTotal(temp.getTotal());
-            page.setPageMax(temp.getLastPage());
-            response.setResult(page);
-        }catch (Exception e){
-            logger.error("post page fail, params = {}, query = {}", query, Throwables.getStackTraceAsString(e));
-            response.setError("post.page.fail");
-        }
-        return response;
-    }
-
-//    @Override
-//    public boolean isExist(String url) {
-//        if(StringUtils.isNotEmpty(url)){
-//            Example example = new Example(Post.class);
-//            Example.Criteria criteria = example.createCriteria();
-//            criteria.andEqualTo("sourceUrl",url);
-//            List<Post> posts =  mapper.selectByExample(example);
-//            if(posts != null && posts.size()>0){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-//    @Override
-//    public Response<Map<String, Post>> getPrevAndNextBlog(Long postid) {
-//        Response<Map<String, Post>> response = new Response<Map<String, Post>>();
-//        Map<String, Post> map = new HashMap<String, Post>();
-//        try {
-//            PostMapper postMapper = (PostMapper) mapper;
-//            List<Post> posts = postMapper.getPrevAndNextBlog(id);
-//            if(posts != null && posts.size()>0){
-//                for(Post temp : posts){
-//                    Long tempId = temp.getPostid();
-//                    if(tempId > postid){
-//                        map.put("next",temp);
-//                    }else{
-//                        map.put("prev",temp);
-//                    }
-//                }
-//            }
-//            response.setResult(map);
-//        } catch (Exception e){
-//            logger.error("post get fail, postid = {}, error = {}", postid, Throwables.getStackTraceAsString(e));
-//            response.setError("post.get.fail");
-//        }
-//        return response;
-//    }
 }

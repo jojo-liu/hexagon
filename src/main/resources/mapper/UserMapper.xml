@@ -1,123 +1,128 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jojoliu.hexagon.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.User" >
-    <id column="userID" property="userid" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="realName" property="realname" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jojoliu.hexagon.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    userID, username, password, realName, email, createTime, avatar
+  <sql id="Base_Column_List">
+    user_id, user_name, password, real_name, email, create_time, avatar, phone_number
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where userID = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
-    where userID = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jojoliu.hexagon.model.User" >
-    insert into user (userID, username, password, 
-      realName, email, createTime, 
-      avatar)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{avatar,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.jojoliu.hexagon.model.User">
+    insert into user (user_id, user_name, password, 
+      real_name, email, create_time, 
+      avatar, phone_number)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{avatar,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.User" >
+  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.User">
     insert into user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        userID,
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="userName != null">
+        user_name,
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password,
       </if>
-      <if test="realname != null" >
-        realName,
+      <if test="realName != null">
+        real_name,
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email,
       </if>
-      <if test="createtime != null" >
-        createTime,
+      <if test="createTime != null">
+        create_time,
       </if>
-      <if test="avatar != null" >
+      <if test="avatar != null">
         avatar,
       </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userid != null" >
-        #{userid,jdbcType=INTEGER},
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="realname != null" >
-        #{realname,jdbcType=VARCHAR},
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="avatar != null" >
+      <if test="avatar != null">
         #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.User">
     update user
-    <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="realname != null" >
-        realName = #{realname,jdbcType=VARCHAR},
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="avatar != null" >
+      <if test="avatar != null">
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
     </set>
-    where userID = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.User" >
+  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.User">
     update user
-    set username = #{username,jdbcType=VARCHAR},
+    set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      realName = #{realname,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      avatar = #{avatar,jdbcType=VARCHAR}
-    where userID = #{userid,jdbcType=INTEGER}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
-  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where username = #{username,jdbcType=INTEGER}
-  </select>
 </mapper>

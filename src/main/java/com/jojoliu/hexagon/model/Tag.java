@@ -3,34 +3,34 @@ package com.jojoliu.hexagon.model;
 import java.util.Date;
 
 public class Tag {
-    private Long tagid;
+    private String tagId;
 
-    private Long createrid;
+    private String createrId;
 
     private String name;
 
     private String code;
 
-    private Long parent;
+    private String parent;
 
-    private Date createtime;
+    private Date createTime;
 
-    private Date updatetime;
+    private Date updateTime;
 
-    public Long getTagid() {
-        return tagid;
+    public String getTagId() {
+        return tagId;
     }
 
-    public void setTagid(Long tagid) {
-        this.tagid = tagid;
+    public void setTagId(String tagId) {
+        this.tagId = tagId == null ? null : tagId.trim();
     }
 
-    public Long getCreaterid() {
-        return createrid;
+    public String getCreaterId() {
+        return createrId;
     }
 
-    public void setCreaterid(Long createrid) {
-        this.createrid = createrid;
+    public void setCreaterId(String createrId) {
+        this.createrId = createrId == null ? null : createrId.trim();
     }
 
     public String getName() {
@@ -49,27 +49,27 @@ public class Tag {
         this.code = code == null ? null : code.trim();
     }
 
-    public Long getParent() {
+    public String getParent() {
         return parent;
     }
 
-    public void setParent(Long parent) {
-        this.parent = parent;
+    public void setParent(String parent) {
+        this.parent = parent == null ? null : parent.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdatetime() {
-        return updatetime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

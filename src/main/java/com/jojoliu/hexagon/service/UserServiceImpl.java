@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User signIn(String phoneNumber, String verificationCode) throws Exception {
         //从数据库中获取用户信息
-        User user = userMapper.selectByUsername(phoneNumber);
+        User user = userMapper.selectByPrimaryKey(phoneNumber);
 //        checkArgument(user != null, "用户名不存在");
 //        String realPassword = user.getPassword();
 //        String md5Password = DigestUtils.md5DigestAsHex(password.getBytes("utf-8"));
@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public int updateInfo(User user) throws Exception {
         //实现有效性校验
-        User resultUser = userMapper.selectByPrimaryKey(user.getUserid());
+        User resultUser = userMapper.selectByPrimaryKey(user.getUserId());
         if(Objects.isNull(resultUser)) {
-            throw new CommonException(ErrorCode.USERINFO_ERROR);
+            throw new CommonException(ErrorCode.USER_INFO_ERROR);
         }
         int result = userMapper.updateByPrimaryKey(user);
         return result;

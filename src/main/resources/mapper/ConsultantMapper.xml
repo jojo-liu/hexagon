@@ -1,134 +1,136 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jojoliu.hexagon.mapper.ConsultantMapper" >
-  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.Consultant" >
-    <id column="consultantID" property="consultantid" jdbcType="INTEGER" />
-    <result column="tagID" property="tagid" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="realName" property="realname" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
-    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jojoliu.hexagon.mapper.ConsultantMapper">
+  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.Consultant">
+    <id column="consultant_id" jdbcType="VARCHAR" property="consultantId" />
+    <result column="tag_id" jdbcType="VARCHAR" property="tagId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    consultantID, tagID, username, password, realName, email, createTime, avatar
+  <sql id="Base_Column_List">
+    consultant_id, tag_id, user_name, password, real_name, email, create_time, avatar
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from consultant
-    where consultantID = #{consultantid,jdbcType=INTEGER}
+    where consultant_id = #{consultantId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from consultant
-    where consultantID = #{consultantid,jdbcType=INTEGER}
+    where consultant_id = #{consultantId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.jojoliu.hexagon.model.Consultant" >
-    insert into consultant (consultantID, tagID, username, 
-      password, realName, email, 
-      createTime, avatar)
-    values (#{consultantid,jdbcType=INTEGER}, #{tagid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{avatar,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.jojoliu.hexagon.model.Consultant">
+    insert into consultant (consultant_id, tag_id, user_name, 
+      password, real_name, email, 
+      create_time, avatar)
+    values (#{consultantId,jdbcType=VARCHAR}, #{tagId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{avatar,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Consultant" >
+  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Consultant">
     insert into consultant
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="consultantid != null" >
-        consultantID,
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="consultantId != null">
+        consultant_id,
       </if>
-      <if test="tagid != null" >
-        tagID,
+      <if test="tagId != null">
+        tag_id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="userName != null">
+        user_name,
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password,
       </if>
-      <if test="realname != null" >
-        realName,
+      <if test="realName != null">
+        real_name,
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email,
       </if>
-      <if test="createtime != null" >
-        createTime,
+      <if test="createTime != null">
+        create_time,
       </if>
-      <if test="avatar != null" >
+      <if test="avatar != null">
         avatar,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="consultantid != null" >
-        #{consultantid,jdbcType=INTEGER},
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="consultantId != null">
+        #{consultantId,jdbcType=VARCHAR},
       </if>
-      <if test="tagid != null" >
-        #{tagid,jdbcType=INTEGER},
+      <if test="tagId != null">
+        #{tagId,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="realname != null" >
-        #{realname,jdbcType=VARCHAR},
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="avatar != null" >
+      <if test="avatar != null">
         #{avatar,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.Consultant" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.Consultant">
     update consultant
-    <set >
-      <if test="tagid != null" >
-        tagID = #{tagid,jdbcType=INTEGER},
+    <set>
+      <if test="tagId != null">
+        tag_id = #{tagId,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="realname != null" >
-        realName = #{realname,jdbcType=VARCHAR},
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="avatar != null" >
+      <if test="avatar != null">
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
     </set>
-    where consultantID = #{consultantid,jdbcType=INTEGER}
+    where consultant_id = #{consultantId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.Consultant" >
+  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.Consultant">
     update consultant
-    set tagID = #{tagid,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
+    set tag_id = #{tagId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      realName = #{realname,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       avatar = #{avatar,jdbcType=VARCHAR}
-    where consultantID = #{consultantid,jdbcType=INTEGER}
+    where consultant_id = #{consultantId,jdbcType=VARCHAR}
   </update>
-  <select id="selectByTagid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+  <!--以上为自动生成-->
+  <select id="selectByTagId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from consultant
-    where tagID = #{tagid,jdbcType=INTEGER}
+    where tag_id = #{Id,jdbcType=VARCHAR}
   </select>
 </mapper>

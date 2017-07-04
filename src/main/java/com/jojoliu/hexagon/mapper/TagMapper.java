@@ -5,13 +5,13 @@ import com.jojoliu.hexagon.model.Tag;
 import java.util.List;
 
 public interface TagMapper {
-    int deleteByPrimaryKey(Long tagid);
+    int deleteByPrimaryKey(String tagId);
 
     int insert(Tag record);
 
     int insertSelective(Tag record);
 
-    Tag selectByPrimaryKey(Long tagid);
+    Tag selectByPrimaryKey(String tagId);
 
     int updateByPrimaryKeySelective(Tag record);
 
@@ -19,5 +19,5 @@ public interface TagMapper {
 
     List<Tag> selectAll();
 
-    List<Tag> selectByParent(Long tagid);
+    List<Tag> selectByParent(String tagId);
 }
