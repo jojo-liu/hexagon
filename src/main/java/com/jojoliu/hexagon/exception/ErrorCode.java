@@ -13,7 +13,10 @@ public enum ErrorCode {
     TAG_ERROR(10003, "标签不存在"),
     ILLEGAL_ERROR(10004, "当前用户在执行非法操作"),
     POST_ERROR(10005, "需求信息不存在"),
-    CONSULTANT_INFO_ERROR(10006, "专家数据不存在");
+    CONSULTANT_INFO_ERROR(10006, "专家数据不存在"),
+    PHONE_NUMBER_ERROR(10007, "手机号码不合法"),
+    VERIFICATION_CODE_ERROR(10008, "验证码错误"),
+    VERIFICATION_CODE_INVALID_ERROR(10009, "验证码过期");
     //自己随意添加错误类型
     ;
 

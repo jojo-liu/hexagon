@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jojoliu.hexagon.mapper.SmsMapper" >
+  <resultMap id="BaseResultMap" type="com.jojoliu.hexagon.model.Sms" >
+    <id column="sms_id" property="smsId" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="verification_code" property="verificationCode" jdbcType="VARCHAR" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sms_id, phone_number, verification_code, send_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sms
+    where sms_id = #{smsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sms
+    where sms_id = #{smsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jojoliu.hexagon.model.Sms" >
+    insert into sms (sms_id, phone_number, verification_code, 
+      send_time)
+    values (#{smsId,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{verificationCode,jdbcType=VARCHAR}, 
+      #{sendTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Sms" >
+    insert into sms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="smsId != null" >
+        sms_id,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="verificationCode != null" >
+        verification_code,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="smsId != null" >
+        #{smsId,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationCode != null" >
+        #{verificationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jojoliu.hexagon.model.Sms" >
+    update sms
+    <set >
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationCode != null" >
+        verification_code = #{verificationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sms_id = #{smsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jojoliu.hexagon.model.Sms" >
+    update sms
+    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      verification_code = #{verificationCode,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=TIMESTAMP}
+    where sms_id = #{smsId,jdbcType=VARCHAR}
+  </update>
+
+  <!--以上为自动生成-->
+  <delete id="deleteByPhoneNumber" parameterType="java.lang.String" >
+    delete from sms
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPhoneNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from sms
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,14 +1,14 @@
 package com.jojoliu.hexagon.controller;
 
 import com.jojoliu.hexagon.common.Response;
-import com.jojoliu.hexagon.model.PayInfo;
 import com.jojoliu.hexagon.service.PayInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Jojo on 26/05/2017.
@@ -25,7 +25,7 @@ public class PayInfoController {
     private Response list() {
         logger.info("支付订单列表查询开始：");
         Response response = new Response();
-        List<PayInfo> payInfoList = payInfoService.list();
+//        List<PayInfo> payInfoList = payInfoService.list();
 //        response.setResult(payInfoList);
         logger.info("支付订单列表查询结束：{}", response);
         return response;
@@ -43,7 +43,7 @@ public class PayInfoController {
     private Response delete(@PathVariable Long id) {
         logger.info("删除支付订单开始：{}", id);
         Response response = new Response();
-        payInfoService.delete(id);
+//        payInfoService.delete(id);
         logger.info("删除支付订单结束：{}", response);
         return response;
     }

@@ -125,4 +125,12 @@
       phone_number = #{phoneNumber,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+
+  <!--以上为自动生成-->
+  <select id="selectByPhoneNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where phone_number = #{phoneNumber,jdbcType=VARCHAR}
+  </select>
 </mapper>

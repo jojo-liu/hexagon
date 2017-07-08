@@ -35,6 +35,11 @@
 			<property name="enableSubPackages" value="true" />  
 		</javaClientGenerator> 
 		<!-- 要生成的数据库表 -->
+		<!--<table tableName="sms" domainObjectName="Sms"-->
+			   <!--enableCountByExample="false" enableUpdateByExample="false"-->
+			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+			   <!--selectByExampleQueryId="false">-->
+		<!--</table>-->
 		<!--<table tableName="test" domainObjectName="Test"-->
 			   <!--enableCountByExample="false" enableUpdateByExample="false"-->
 			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
@@ -65,11 +70,11 @@
 			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
 			   <!--selectByExampleQueryId="false">-->
 		<!--</table>-->
-		<!--<table tableName="user" domainObjectName="User"-->
-			   <!--enableCountByExample="false" enableUpdateByExample="false"-->
-			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-			   <!--selectByExampleQueryId="false">-->
-		<!--</table>-->
+		<table tableName="user" domainObjectName="User"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+		</table>
 		
 	</context>
 </generatorConfiguration>
