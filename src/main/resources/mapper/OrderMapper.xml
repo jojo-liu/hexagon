@@ -8,11 +8,11 @@
     <result column="price" jdbcType="INTEGER" property="price" />
     <result column="post_id" jdbcType="VARCHAR" property="postId" />
     <result column="consultant_id" jdbcType="VARCHAR" property="consultantId" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="post_status" jdbcType="INTEGER" property="postStatus" />
     <result column="pay_channel" jdbcType="VARCHAR" property="payChannel" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_id, order_no, create_time, price, post_id, consultant_id, status, pay_channel
+    order_id, order_no, create_time, price, post_id, consultant_id, post_status, pay_channel
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -27,10 +27,10 @@
   <insert id="insert" parameterType="com.jojoliu.hexagon.model.Order">
     insert into order (order_id, order_no, create_time, 
       price, post_id, consultant_id, 
-      status, pay_channel)
+      post_status, pay_channel)
     values (#{orderId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{price,jdbcType=INTEGER}, #{postId,jdbcType=VARCHAR}, #{consultantId,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{payChannel,jdbcType=VARCHAR})
+      #{postStatus,jdbcType=INTEGER}, #{payChannel,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Order">
     insert into order
@@ -53,8 +53,8 @@
       <if test="consultantId != null">
         consultant_id,
       </if>
-      <if test="status != null">
-        status,
+      <if test="postStatus != null">
+        post_status,
       </if>
       <if test="payChannel != null">
         pay_channel,
@@ -79,8 +79,8 @@
       <if test="consultantId != null">
         #{consultantId,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=INTEGER},
       </if>
       <if test="payChannel != null">
         #{payChannel,jdbcType=VARCHAR},
@@ -105,8 +105,8 @@
       <if test="consultantId != null">
         consultant_id = #{consultantId,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        post_status = #{postStatus,jdbcType=INTEGER},
       </if>
       <if test="payChannel != null">
         pay_channel = #{payChannel,jdbcType=VARCHAR},
@@ -121,7 +121,7 @@
       price = #{price,jdbcType=INTEGER},
       post_id = #{postId,jdbcType=VARCHAR},
       consultant_id = #{consultantId,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      post_status = #{postStatus,jdbcType=INTEGER},
       pay_channel = #{payChannel,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>

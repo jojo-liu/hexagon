@@ -58,7 +58,7 @@ CREATE TABLE `order` (
   `price` int(11) DEFAULT NULL,
   `post_id` varchar(128) DEFAULT NULL,
   `consultant_id` varchar(128) DEFAULT NULL,
-  `status` int(2) DEFAULT NULL,
+  `post_status` int(2) NOT NULL DEFAULT '-1',
   `pay_channel` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -140,7 +140,8 @@ CREATE TABLE `post` (
   `create_time` timestamp NULL DEFAULT NULL,
   `update_time` timestamp NULL DEFAULT NULL,
   `price` int(11) NOT NULL DEFAULT '100',
-  `status` int(2) NOT NULL DEFAULT '-1',
+  `user_order_status` int(2) NOT NULL DEFAULT '-1',
+  `consultant_order_status` int(2) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -301,4 +302,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-09 11:17:57
+-- Dump completed on 2017-07-09 12:30:51

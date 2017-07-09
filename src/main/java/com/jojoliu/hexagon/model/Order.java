@@ -15,7 +15,7 @@ public class Order {
 
     private String consultantId;
 
-    private Integer status;
+    private Integer postStatus;
 
     private String payChannel;
 
@@ -67,12 +67,12 @@ public class Order {
         this.consultantId = consultantId == null ? null : consultantId.trim();
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getPostStatus() {
+        return postStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setPostStatus(Integer postStatus) {
+        this.postStatus = postStatus;
     }
 
     public String getPayChannel() {

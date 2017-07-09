@@ -19,7 +19,9 @@ public class Post {
 
     private Integer price;
 
-    private Integer status;
+    private Integer userOrderStatus;
+
+    private Integer consultantOrderStatus;
 
     public String getPostId() {
         return postId;
@@ -85,11 +87,19 @@ public class Post {
         this.price = price;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getUserOrderStatus() {
+        return userOrderStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setUserOrderStatus(Integer userOrderStatus) {
+        this.userOrderStatus = userOrderStatus;
+    }
+
+    public Integer getConsultantOrderStatus() {
+        return consultantOrderStatus;
+    }
+
+    public void setConsultantOrderStatus(Integer consultantOrderStatus) {
+        this.consultantOrderStatus = consultantOrderStatus;
     }
 }
