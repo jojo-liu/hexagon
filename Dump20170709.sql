@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `consultant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `consultant` (
-  `consultantID` bigint(20) NOT NULL,
-  `tagID` bigint(20) NOT NULL,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `realName` varchar(45) DEFAULT NULL,
+  `consultant_id` varchar(128) NOT NULL,
+  `tag_id` varchar(128) DEFAULT NULL,
+  `user_name` varchar(45) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
+  `real_name` varchar(45) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `avatar` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`consultantID`)
+  PRIMARY KEY (`consultant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,15 +52,15 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
-  `orderID` bigint(20) NOT NULL,
-  `orderNo` varchar(45) NOT NULL,
-  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `price` bigint(20) NOT NULL,
-  `postID` bigint(20) NOT NULL,
-  `consultantID` bigint(20) NOT NULL,
+  `order_id` varchar(128) NOT NULL,
+  `order_no` varchar(45) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `price` int(11) DEFAULT NULL,
+  `post_id` varchar(128) DEFAULT NULL,
+  `consultant_id` varchar(128) DEFAULT NULL,
   `status` char(1) DEFAULT NULL,
-  `payChannel` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`orderID`)
+  `pay_channel` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,9 +81,9 @@ DROP TABLE IF EXISTS `payChannel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payChannel` (
-  `id` bigint(20) NOT NULL COMMENT 'ID',
-  `payChannel` varchar(50) DEFAULT NULL COMMENT '支付渠道编号',
-  `payChannelName` varchar(50) DEFAULT NULL COMMENT '支付渠道名称',
+  `id` varchar(128) NOT NULL COMMENT 'ID',
+  `pay_channel` varchar(50) DEFAULT NULL COMMENT '支付渠道编号',
+  `pay_channel_name` varchar(50) DEFAULT NULL COMMENT '支付渠道名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='支付渠道';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -94,7 +94,7 @@ CREATE TABLE `payChannel` (
 
 LOCK TABLES `payChannel` WRITE;
 /*!40000 ALTER TABLE `payChannel` DISABLE KEYS */;
-INSERT INTO `payChannel` VALUES (0,'0000000000','银联'),(1,'0000000001','支付宝'),(2,'0000000002','微信');
+INSERT INTO `payChannel` VALUES ('0','0000000000','银联'),('1','0000000001','支付宝'),('2','0000000002','微信');
 /*!40000 ALTER TABLE `payChannel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,10 +106,10 @@ DROP TABLE IF EXISTS `payInfo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payInfo` (
-  `id` bigint(20) NOT NULL COMMENT 'ID',
-  `payOrderNo` varchar(50) DEFAULT NULL COMMENT '支付订单编号',
-  `orderNo` varchar(50) DEFAULT NULL COMMENT '业务订单编号',
-  `payChannel` varchar(50) DEFAULT NULL COMMENT '支付渠道编号',
+  `id` varchar(128) NOT NULL COMMENT 'ID',
+  `pay_order_no` varchar(50) DEFAULT NULL COMMENT '支付订单编号',
+  `order_no` varchar(50) DEFAULT NULL COMMENT '业务订单编号',
+  `pay_channel` varchar(50) DEFAULT NULL COMMENT '支付渠道编号',
   `status` char(1) DEFAULT NULL COMMENT '订单状态：I：初始，P：处理中，S：成功，F：失败',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='支付信息';
@@ -132,15 +132,15 @@ DROP TABLE IF EXISTS `post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `post` (
-  `postID` bigint(20) NOT NULL,
-  `userID` bigint(20) NOT NULL,
-  `tagID` bigint(20) NOT NULL,
-  `title` varchar(128) NOT NULL,
-  `summary` varchar(256) NOT NULL,
-  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `price` int(11) NOT NULL,
-  PRIMARY KEY (`postID`)
+  `post_id` varchar(128) NOT NULL,
+  `user_id` varchar(128) DEFAULT NULL,
+  `tag_id` varchar(128) DEFAULT NULL,
+  `title` varchar(128) DEFAULT NULL,
+  `summary` varchar(256) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT NULL,
+  `update_time` timestamp NULL DEFAULT NULL,
+  `price` int(11) NOT NULL DEFAULT '100',
+  PRIMARY KEY (`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -161,15 +161,15 @@ DROP TABLE IF EXISTS `session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `session` (
-  `sessionID` bigint(20) NOT NULL,
-  `accessToken` varchar(128) NOT NULL,
-  `refreshToken` varchar(128) NOT NULL,
-  `accessTokenValidTime` varchar(128) NOT NULL,
-  `refreshTokenTime` varchar(128) NOT NULL,
-  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `userID` bigint(20) NOT NULL,
-  PRIMARY KEY (`sessionID`)
+  `session_id` varchar(128) NOT NULL,
+  `access_token` varchar(128) NOT NULL,
+  `refresh_token` varchar(128) NOT NULL,
+  `access_token_validTime` varchar(128) NOT NULL,
+  `refresh_token_time` varchar(128) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` varchar(128) NOT NULL,
+  PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -183,6 +183,32 @@ LOCK TABLES `session` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sms`
+--
+
+DROP TABLE IF EXISTS `sms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sms` (
+  `sms_id` varchar(128) NOT NULL,
+  `phone_number` varchar(45) DEFAULT NULL,
+  `verification_code` varchar(45) DEFAULT NULL,
+  `send_time` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`sms_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sms`
+--
+
+LOCK TABLES `sms` WRITE;
+/*!40000 ALTER TABLE `sms` DISABLE KEYS */;
+INSERT INTO `sms` VALUES ('09adb75f791f4d4790288b1b859e1d92','18844195512','032232','2017-07-05 18:22:06'),('64f9e4675e2a4b80ba052a7acbd2579f','18510863441','285238','2017-07-09 14:53:38');
+/*!40000 ALTER TABLE `sms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tag`
 --
 
@@ -190,14 +216,14 @@ DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tag` (
-  `tagID` bigint(20) NOT NULL,
-  `createrID` bigint(20) NOT NULL,
+  `tag_id` varchar(128) NOT NULL,
+  `creater_id` varchar(128) NOT NULL,
   `name` varchar(45) NOT NULL,
   `code` varchar(45) NOT NULL,
-  `parent` bigint(20) DEFAULT NULL,
-  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`tagID`)
+  `parent` varchar(128) DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -243,14 +269,15 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `userID` bigint(20) NOT NULL,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `realName` varchar(45) DEFAULT NULL,
+  `user_id` varchar(128) NOT NULL,
+  `user_name` varchar(45) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
+  `real_name` varchar(45) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `avatar` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`userID`)
+  `phone_number` varchar(45) NOT NULL DEFAULT '10000000000',
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -260,6 +287,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('3df342155983460ca22289d51fc3d910','18844195512','3e62f93a9422292ef44538e1a5d31aee',NULL,NULL,'2017-07-05 19:11:55',NULL,'18844195512');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -272,4 +300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-31 22:46:00
+-- Dump completed on 2017-07-09 11:00:42
