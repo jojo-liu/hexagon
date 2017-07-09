@@ -10,9 +10,10 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    post_id, user_id, tag_id, title, summary, create_time, update_time, price
+    post_id, user_id, tag_id, title, summary, create_time, update_time, price, status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,12 @@
   <insert id="insert" parameterType="com.jojoliu.hexagon.model.Post">
     insert into post (post_id, user_id, tag_id, 
       title, summary, create_time, 
-      update_time, price)
+      update_time, price, status
+      )
     values (#{postId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{tagId,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{price,jdbcType=INTEGER})
+      #{updateTime,jdbcType=TIMESTAMP}, #{price,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Post">
     insert into post
@@ -59,6 +62,9 @@
       <if test="price != null">
         price,
       </if>
+      <if test="status != null">
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="postId != null">
@@ -84,6 +90,9 @@
       </if>
       <if test="price != null">
         #{price,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -111,6 +120,9 @@
       <if test="price != null">
         price = #{price,jdbcType=INTEGER},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
     </set>
     where post_id = #{postId,jdbcType=VARCHAR}
   </update>
@@ -122,7 +134,8 @@
       summary = #{summary,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      price = #{price,jdbcType=INTEGER}
+      price = #{price,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
     where post_id = #{postId,jdbcType=VARCHAR}
   </update>
 
