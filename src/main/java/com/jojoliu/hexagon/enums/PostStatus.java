@@ -17,8 +17,7 @@ public enum PostStatus {
     PendingPay("待支付",4),
     MissedOrder("未接单",5),
     ReceivedOrder("已接单",6),
-    Completed("已完成",7)
-    ;
+    Completed("已完成",7);
 
     private String msg;
     private int idx;
