@@ -17,7 +17,7 @@ public interface PostMapper {
 
     int updateByPrimaryKey(Post record);
 
-    List<Post> selectByUserId(String userId);
-
     List<Post> selectByConsultant(String tagId);
+
+    List<Post> selectByUserId(String userId);
 }

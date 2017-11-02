@@ -43,17 +43,23 @@ public class PostServiceImpl implements PostService {
         if(Objects.isNull((tagMapper.selectByPrimaryKey(post.getTagId())))) {
             throw new CommonException(ErrorCode.TAG_ERROR);
         }
-        if(!Objects.isNull(post.getCreateTime())) {
+        if(Objects.isNull(post.getCreateTime())) {
             post.setCreateTime(new Date());//设置创建时间
-            post.setUpdateTime(new Date());
+            post.setUpdateTime(new Date());//设置更新时间
         }
         post.setPostId(UUidUtil.generate());//设置postId
 
         int result = postMapper.insert(post);
         if(result == 1) {
+            //需求发布成功
+            post.setPostStatus(3);//设置当前的post状态为发布成功
+            postMapper.updateByPrimaryKey(post);
+            //此时，需要同步生成订单并支付
             return true;
         }
         else {
+            post.setPostStatus(1);//设置当前的post状态为待发布
+            postMapper.updateByPrimaryKey(post);
             return false;
         }
     }

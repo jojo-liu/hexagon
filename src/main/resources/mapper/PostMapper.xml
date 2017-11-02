@@ -10,12 +10,10 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="price" jdbcType="INTEGER" property="price" />
-    <result column="user_order_status" jdbcType="INTEGER" property="userOrderStatus" />
-    <result column="consultant_order_status" jdbcType="INTEGER" property="consultantOrderStatus" />
+    <result column="post_status" jdbcType="INTEGER" property="postStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    post_id, user_id, tag_id, title, summary, create_time, update_time, price, user_order_status, 
-    consultant_order_status
+    post_id, user_id, tag_id, title, summary, create_time, update_time, price, post_status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -30,12 +28,12 @@
   <insert id="insert" parameterType="com.jojoliu.hexagon.model.Post">
     insert into post (post_id, user_id, tag_id, 
       title, summary, create_time, 
-      update_time, price, user_order_status, 
-      consultant_order_status)
+      update_time, price, post_status
+      )
     values (#{postId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{tagId,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{price,jdbcType=INTEGER}, #{userOrderStatus,jdbcType=INTEGER}, 
-      #{consultantOrderStatus,jdbcType=INTEGER})
+      #{updateTime,jdbcType=TIMESTAMP}, #{price,jdbcType=INTEGER}, #{postStatus,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jojoliu.hexagon.model.Post">
     insert into post
@@ -64,11 +62,8 @@
       <if test="price != null">
         price,
       </if>
-      <if test="userOrderStatus != null">
-        user_order_status,
-      </if>
-      <if test="consultantOrderStatus != null">
-        consultant_order_status,
+      <if test="postStatus != null">
+        post_status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -96,11 +91,8 @@
       <if test="price != null">
         #{price,jdbcType=INTEGER},
       </if>
-      <if test="userOrderStatus != null">
-        #{userOrderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="consultantOrderStatus != null">
-        #{consultantOrderStatus,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -128,11 +120,8 @@
       <if test="price != null">
         price = #{price,jdbcType=INTEGER},
       </if>
-      <if test="userOrderStatus != null">
-        user_order_status = #{userOrderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="consultantOrderStatus != null">
-        consultant_order_status = #{consultantOrderStatus,jdbcType=INTEGER},
+      <if test="postStatus != null">
+        post_status = #{postStatus,jdbcType=INTEGER},
       </if>
     </set>
     where post_id = #{postId,jdbcType=VARCHAR}
@@ -146,8 +135,7 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       price = #{price,jdbcType=INTEGER},
-      user_order_status = #{userOrderStatus,jdbcType=INTEGER},
-      consultant_order_status = #{consultantOrderStatus,jdbcType=INTEGER}
+      post_status = #{postStatus,jdbcType=INTEGER}
     where post_id = #{postId,jdbcType=VARCHAR}
   </update>
 

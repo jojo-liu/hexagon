@@ -19,9 +19,7 @@ public class Post {
 
     private Integer price;
 
-    private Integer userOrderStatus;
-
-    private Integer consultantOrderStatus;
+    private Integer postStatus;
 
     public String getPostId() {
         return postId;
@@ -87,19 +85,11 @@ public class Post {
         this.price = price;
     }
 
-    public Integer getUserOrderStatus() {
-        return userOrderStatus;
+    public Integer getPostStatus() {
+        return postStatus;
     }
 
-    public void setUserOrderStatus(Integer userOrderStatus) {
-        this.userOrderStatus = userOrderStatus;
-    }
-
-    public Integer getConsultantOrderStatus() {
-        return consultantOrderStatus;
-    }
-
-    public void setConsultantOrderStatus(Integer consultantOrderStatus) {
-        this.consultantOrderStatus = consultantOrderStatus;
+    public void setPostStatus(Integer postStatus) {
+        this.postStatus = postStatus;
     }
 }

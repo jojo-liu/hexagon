@@ -15,9 +15,11 @@ public class Order {
 
     private String consultantId;
 
-    private Integer postStatus;
-
     private String payChannel;
+
+    private Integer userOrderStatus;
+
+    private Integer consultantOrderStatus;
 
     public String getOrderId() {
         return orderId;
@@ -67,19 +69,27 @@ public class Order {
         this.consultantId = consultantId == null ? null : consultantId.trim();
     }
 
-    public Integer getPostStatus() {
-        return postStatus;
-    }
-
-    public void setPostStatus(Integer postStatus) {
-        this.postStatus = postStatus;
-    }
-
     public String getPayChannel() {
         return payChannel;
     }
 
     public void setPayChannel(String payChannel) {
         this.payChannel = payChannel == null ? null : payChannel.trim();
+    }
+
+    public Integer getUserOrderStatus() {
+        return userOrderStatus;
+    }
+
+    public void setUserOrderStatus(Integer userOrderStatus) {
+        this.userOrderStatus = userOrderStatus;
+    }
+
+    public Integer getConsultantOrderStatus() {
+        return consultantOrderStatus;
+    }
+
+    public void setConsultantOrderStatus(Integer consultantOrderStatus) {
+        this.consultantOrderStatus = consultantOrderStatus;
     }
 }

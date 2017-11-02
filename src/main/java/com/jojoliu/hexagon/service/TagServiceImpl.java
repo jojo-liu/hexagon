@@ -1,6 +1,5 @@
 package com.jojoliu.hexagon.service;
 
-import com.jojoliu.hexagon.controller.UserController;
 import com.jojoliu.hexagon.mapper.TagMapper;
 import com.jojoliu.hexagon.model.Tag;
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ import java.util.List;
 @Service
 public class TagServiceImpl implements TagService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(TagServiceImpl.class);
 
     @Autowired
     private TagMapper tagMapper;
