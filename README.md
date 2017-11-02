@@ -1,44 +1,23 @@
 # hexagon
-construct a consult platform which provides people with business advice
 
-目前需要实现的核心需求：
-1. 实现用户发布需求
-2. 向用户显示带有相关标签的专家信息
-3. 实现电话注册功能
-4. 实现微信号注册功能
-5. 订单服务功能
-6. 实现用户支付功能，接入点微信或者支付宝支付接口
+construct a consulting platform which provides people with business advice
 
-管理模块具体描述：
+Current core requirements：
 
-1	客户信息管理
-客户可以注册本系统然后发布需求并附加报酬金额，客户注册成功后其个人信息将被加入到客户表中。登录系统后，客户可以查询和修改个人信息。
-2	需求信息管理
-客户登录系统后可以点击“发布”按钮来发布需求，需求发布成功之后，客户可以浏览自己发布的需求，或者对需求进行修改，删除等操作。
-3	订单信息管理
-客户可以选择相应的专家来获取咨询，如果想要让那位专家来帮忙，就付款并由系统自动生成订单表。订单表包括订单生成之后就可以对订单进行管理，包括取消，删除订单等操作。
-4	支付模块管理
-利用支付宝和微信支付接口来实现支付功能。当用户发布完需求之后并不会立刻要求付款，但是如果有专家来接单或者用户自己请专家接单，那么这时候就需要付款来生成订单。当咨询结束之后就user就会确认订单完成。如果用户不满意，可以申请退款，分为30%，50%和全额退款（退款必须在订单完成之后三天内发起）。
+implement the module which allows user to publish requirement
+establish experts's information with corresponding label
+implement SMS registration module
+call WeChat API to allow users to register the platform through WeChat Account
+order module
+implement user payment module thoguth alipay API or WeChat Pay API
+Program framework brief： I established this project with Spring Boot framework, and integrated MyBatis to operate MySQL database more conveniently including CRUD(Create, Read, Update and Delete) and other complex operations.
 
-项目框架简介：
-本项目的核心是Spring Boot框架，通过集成Mybatis来实现数据库的操作，包括CRUD和其他复杂的操作
-druid是数据库连接池，已经配置完毕，可以直接使用(http://git.oschina.net/free/Mapper)；
-log4j2是用来处理日志的部件，也已经配置完毕，可以直接使用；
+I configured Druid as the data connection pool which is access, and Log4j2 as the tool to handle server logs.
 
-本项目前后端分离，前端由徐文琪同志负责，使用vue框架结合AJAX来实现前后端的数据通信。
+Since in this project, frontend is separate with backend, I are going to implement frontend with Vue, and they can transfer data through AJAX.
 
-由于我们使用maven来构建项目，pom.xml是项目中添加的各种依赖，resource/application.yml是项目的各种配置参数。
+Project Structure:
 
-main/java/com.jojoliu.hexagon/+++
+I used maven to build this project. pom.xml records all kinds of dependencies I need to use, resource/application.yml records all configurations of the project.
 
-model:存放各种实体类，和数据库中的表示一一对应的关系
-
-mapper：存放各个实体类所对应的mapper，/resources/mapper下对应的xml文件，里面可以实现sql语句 
-
-controller：存放各个实体类所对应的controller，主要负责页面的映射和与实体类相关的函数接口
-
-service：编写和实体类相关的业务函数 
-
-util：一些工具类
-
-common：一些公共类，目前有page用来实现分页功能，和Response共同使用，用来分页显示结果（包括用户查询的“专家”结果，或者专家查询的”用户需求“结果）
+main/java/com.jojoliu.hexagon/+++ model: stores entities which are one-to-one corresponding with the table in database. mapper: stores all mappers. controller: stores controller corresponding to each entity, maps http request to corresponding function service: implements business functions
